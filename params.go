@@ -55,6 +55,12 @@ var simNetParams = params{
 	rpcPort: "18556",
 }
 
+// BsafeNetParams
+var bsafeNetParams = params{
+	Params:  &chaincfg.BsafeNetParams,
+	rpcPort: "34821",
+}
+
 // netName returns the name used when referring to a bitcoin network.  At the
 // time of writing, btcd currently places blocks for testnet version 3 in the
 // data and log directory "testnet", which does not match the Name field of the

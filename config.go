@@ -131,7 +131,8 @@ type config struct {
 	OnionProxyPass       string        `long:"onionpass" default-mask:"-" description:"Password for onion proxy server"`
 	NoOnion              bool          `long:"noonion" description:"Disable connecting to tor hidden services"`
 	TorIsolation         bool          `long:"torisolation" description:"Enable Tor stream isolation by randomizing user credentials for each connection."`
-	TestNet3             bool          `long:"testnet" description:"Use the test network"`
+  TestNet3             bool          `long:"testnet" description:"Use the test network"`
+  BsafeNet             bool          `long:"bsafenet" description:"Use the bsafe network"`
 	RegressionTest       bool          `long:"regtest" description:"Use the regression test network"`
 	SimNet               bool          `long:"simnet" description:"Use the simulation test network"`
 	AddCheckpoints       []string      `long:"addcheckpoint" description:"Add a custom checkpoint.  Format: '<height>:<hash>'"`
@@ -543,6 +544,10 @@ func loadConfig() (*config, []string, error) {
 		numNets++
 		activeNetParams = &regressionNetParams
 	}
+	if cfg.BsafeNet {
+		numNets++
+		activeNetParams = &bsafeNetParams
+	}
 	if cfg.SimNet {
 		numNets++
 		// Also disable dns seeding on the simulation test network.
@@ -550,7 +555,7 @@ func loadConfig() (*config, []string, error) {
 		cfg.DisableDNSSeed = true
 	}
 	if numNets > 1 {
-		str := "%s: The testnet, regtest, segnet, and simnet params " +
+		str := "%s: The testnet, bsafenet, regtest, segnet, and simnet params " +
 			"can't be used together -- choose one of the four"
 		err := fmt.Errorf(str, funcName)
 		fmt.Fprintln(os.Stderr, err)

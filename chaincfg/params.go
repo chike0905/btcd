@@ -498,6 +498,84 @@ var TestNet3Params = Params{
 	HDCoinType: 1,
 }
 
+// BsafeNet Params
+var BsafeNetParams = Params{
+	Name:        "bsafenet",
+	Net:         wire.BsafeNet,
+	DefaultPort: "34821",
+	DNSSeeds: []DNSSeed{
+		{"bsafe1.sfc.wide.ad.jp", false},
+	},
+
+	// Chain parameters
+	GenesisBlock:             &bsafeNetGenesisBlock,
+	GenesisHash:              &bsafeNetGenesisHash,
+	PowLimit:                 regressionPowLimit,
+	PowLimitBits:             0x207fffff, // same as regtest
+	BIP0034Height:            0,  // always
+	BIP0065Height:            0, // always
+	BIP0066Height:            0, // always
+	CoinbaseMaturity:         100,
+	SubsidyReductionInterval: 210000,
+	TargetTimespan:           time.Hour * 24 * 14, // 14 days
+	TargetTimePerBlock:       time.Minute * 10,    // 10 minutes
+	RetargetAdjustmentFactor: 4,                   // 25% less, 400% more
+	ReduceMinDifficulty:      true,
+	MinDiffReductionTime:     time.Minute * 20, // TargetTimePerBlock * 2
+	GenerateSupported:        false,
+
+	// Checkpoints ordered from oldest to newest.
+	Checkpoints: nil,
+  /*[]Checkpoint{
+		{0, newHashFromStr("5f30a751af9256e8f97c7b80d644d18f1b63089a506344dd7539ca042a7ba00c")},
+	},*/
+
+	// Consensus rule change deployments.
+	//
+	// The miner confirmation window is defined as:
+	//   target proof of work timespan / target proof of work spacing
+	RuleChangeActivationThreshold: 1512, // 75% of MinerConfirmationWindow
+	MinerConfirmationWindow:       2016,
+	Deployments: [DefinedDeployments]ConsensusDeployment{
+		DeploymentTestDummy: {
+			BitNumber:  28,
+			StartTime:  1199145601, // January 1, 2008 UTC
+			ExpireTime: 1230767999, // December 31, 2008 UTC
+		},
+		DeploymentCSV: {
+			BitNumber:  0,
+			StartTime:  1456790400, // March 1st, 2016
+			ExpireTime: 1493596800, // May 1st, 2017
+		},
+		DeploymentSegwit: {
+			BitNumber:  1,
+			StartTime:  1462060800, // May 1, 2016 UTC
+			ExpireTime: 1493596800, // May 1, 2017 UTC.
+		},
+	},
+
+	// Mempool parameters
+	RelayNonStdTxs: true,
+
+	// Human-readable part for Bech32 encoded segwit addresses, as defined in
+	// BIP 173.
+	Bech32HRPSegwit: "tb", // always tb for test net
+
+	// Address encoding magics
+	PubKeyHashAddrID:        0x6f, // starts with m or n
+	ScriptHashAddrID:        0xc4, // starts with 2
+	WitnessPubKeyHashAddrID: 0x03, // starts with QW
+	WitnessScriptHashAddrID: 0x28, // starts with T7n
+	PrivateKeyID:            0xef, // starts with 9 (uncompressed) or c (compressed)
+
+	// BIP32 hierarchical deterministic extended key magics
+	HDPrivateKeyID: [4]byte{0x04, 0x35, 0x83, 0x94}, // starts with tprv
+	HDPublicKeyID:  [4]byte{0x04, 0x35, 0x87, 0xcf}, // starts with tpub
+
+	// BIP44 coin type used in the hierarchical deterministic path for
+	// address generation.
+	HDCoinType: 1,
+}
 // SimNetParams defines the network parameters for the simulation test Bitcoin
 // network.  This network is similar to the normal test network except it is
 // intended for private use within a group of individuals doing simulation
