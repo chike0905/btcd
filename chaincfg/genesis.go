@@ -115,6 +115,33 @@ var regTestGenesisBlock = wire.MsgBlock{
 	Transactions: []*wire.MsgTx{&genesisCoinbaseTx},
 }
 
+// mynet
+var myNetGenesisHash = chainhash.Hash([chainhash.HashSize]byte{ // Make go vet happy    
+    0xb8, 0x48, 0xbc, 0xdd, 0xf9, 0xc2, 0x1c, 0xb9,
+    0x99, 0x9e, 0x01, 0xdd, 0x22, 0xe9, 0x47, 0x59,
+    0x77, 0x4e, 0xa9, 0x76, 0xc1, 0xd4, 0x52, 0x0b,
+    0x32, 0x86, 0xdc, 0x69, 0xf7, 0x90, 0x87, 0x71,
+})
+
+// myNetMerkleRoot is the hash of the first transaction in the genesis
+// block for the my network.  It is the same as the merkle root
+// for the main network.
+var myNetGenesisMerkleRoot = genesisMerkleRoot
+
+// myNetGenesisBlock defines the genesis block of the block chain which
+// serves as the public transaction ledger for the my network.
+var myNetGenesisBlock = wire.MsgBlock{
+	Header: wire.BlockHeader{
+		Version:    1,
+		PrevBlock:  chainhash.Hash{},         // 0000000000000000000000000000000000000000000000000000000000000000
+		MerkleRoot: myNetGenesisMerkleRoot,   // 4a5e1e4baab89f3a32518a88c31bc87f618f76673e2cc77ab2127b7afdeda33b
+		Timestamp:  time.Unix(1581663396, 0),
+		Bits:       0x207fffff,               // 545259519 [7fffff0000000000000000000000000000000000000000000000000000000000]
+		Nonce:      1,
+	},
+	Transactions: []*wire.MsgTx{&genesisCoinbaseTx},
+}
+
 // testNet3GenesisHash is the hash of the first block in the block chain for the
 // test network (version 3).
 var testNet3GenesisHash = chainhash.Hash([chainhash.HashSize]byte{ // Make go vet happy.
