@@ -166,7 +166,7 @@ var bsafeNetGenesisBlock = wire.MsgBlock{
 		MerkleRoot: bsafeNetGenesisMerkleRoot, //
 		Timestamp:  time.Unix(1464966958, 0),  // --bsafemod
 		Bits:       0x1d00ffff,                // --bsafemod
-    Nonce:      0x00000000,                // 0
+    Nonce:      0,                // 0
 	},
 	Transactions: []*wire.MsgTx{&genesisCoinbaseTx},
 }

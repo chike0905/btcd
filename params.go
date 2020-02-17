@@ -58,7 +58,7 @@ var simNetParams = params{
 // BsafeNetParams
 var bsafeNetParams = params{
 	Params:  &chaincfg.BsafeNetParams,
-	rpcPort: "34821",
+	rpcPort: "34822",
 }
 
 // netName returns the name used when referring to a bitcoin network.  At the
