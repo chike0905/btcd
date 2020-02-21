@@ -540,17 +540,17 @@ var BsafeNetParams = Params{
 		DeploymentTestDummy: {
 			BitNumber:  28,
 			StartTime:  1199145601, // January 1, 2008 UTC
-			ExpireTime: 1230767999, // December 31, 2008 UTC
+			ExpireTime: math.MaxInt64, // Never expires
 		},
 		DeploymentCSV: {
 			BitNumber:  0,
 			StartTime:  1456790400, // March 1st, 2016
-			ExpireTime: 1493596800, // May 1st, 2017
+			ExpireTime: math.MaxInt64, // Never expires
 		},
 		DeploymentSegwit: {
 			BitNumber:  1,
 			StartTime:  1462060800, // May 1, 2016 UTC
-			ExpireTime: 1493596800, // May 1, 2017 UTC.
+			ExpireTime: math.MaxInt64, // Never expires
 		},
 	},
 
